@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>draganddrop</title>
+	<style>
+	div, ul, li, body{
+		margin: 0;
+		padding: 0;
+	}
+	body{
+		width: 100%;
+	}
+	.box{
+		width: 48%;
+		float: left;
+		height: 200px;
+		border: 2px solid #000;
+		overflow: hidden;
+	}
+	ul li{
+		list-style: none;
+		margin-bottom: 4px;
+		padding: 2px;
+		background-color: lightblue;
+	}
+	.over{
+		width: 48%;
+		float: left;
+		height: 200px;
+		border: 2px dashed #ccc;
+	}
+	</style>
+
+	<script>
+	window.addEventListener('load',loadDemo,false);
+	var targetBox;
+	var theTarget;
+	var items;
+	function loadDemo(){
+		items = document.querySelectorAll('#list li');
+		[].forEach.call(items,function(item){
+			item.addEventListener('dragstart',handleDragStart,false);
+			item.addEventListener('dragEnd',handleDragEnd,false);
+		});
+		targetBox = document.getElementById('targetBox');
+		targetBox.addEventListener('dragenter',handleDragEnter,false);
+		targetBox.addEventListener('dragleave',handleDragLeave,false);
+		targetBox.addEventListener('dragover',handleDragOver,false);
+		targetBox.addEventListener('drop',handleDrop,false);
+	}
+	function handleDragStart(e){
+		//this == e.target
+		e.effectAllowed = 'copy';
+		e.dataTransfer.setData('text/html',this.innerHTML);
+		theTarget = this;
+	}
+
+	function handleDragEnd(e){
+	  //恢复原状
+		return false;
+	}
+
+	function handleDragEnter(e){
+		//阻止默认事件
+		//阻止事件冒泡
+		e.stopPropagation();
+		e.preventDefault();
+		return false;
+	}
+
+	function handleDragLeave(e){
+		return false;
+	}
+
+	function handleDragOver(e){
+		e.stopPropagation();
+		e.preventDefault();
+		targetBox.className = 'over';
+		return false;
+	}
+
+	function handleDrop(e){
+		e.stopPropagation();
+		e.preventDefault();
+		var oUl = document.createElement('ul');
+		var oLi = document.createElement('li');
+		var content = e.dataTransfer.getData('text/html');
+		oLi.innerHTML = content;
+
+		if(this !== theTarget){
+			// items.removeChild(theTarget);
+			console.log(theTarget.parentNode);  //  ul
+			console.log(theTarget);  //  拖动li
+			theTarget.parentNode.removeChild(theTarget);  //将原来的ndoe节点删除
+		}
+
+		oUl.appendChild(oLi);
+		targetBox.appendChild(oUl);
+		targetBox.className = 'box';
+		return false;
+	}
+	</script>
+</head>
+<body>
+	<div class="box">
+		<ul id="list">
+			<li class="item" draggable="true">111</li>
+			<li class="item" draggable="true">222</li>
+			<li class="item" draggable="true">333</li>
+			<li class="item" draggable="true">444</li>
+		</ul>
+	</div>
+	<div id="targetBox" class="box">
+	</div>
+</body>
+</html>
