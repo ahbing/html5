@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>objectURL demo</title>
+	<script>
+
+	window.onload =function(){
+		var fileSelect = document.getElementById('fileSelect'),
+			  fileElem = document.getElementById('fileElem'),
+			  fileList = document.getElementById('fileList');
+
+		fileSelect.addEventListener('click',function(e){
+			if(fileElem){
+				fileElem.click();
+			}
+			e.preventDefault();
+		},false);
+	}
+
+  function handleFile(files){
+  	console.log(files);
+
+  	if(!files.length){
+
+  		fileList.innerHTML = '<p>没有选择文件</p>';
+
+  	}else{
+
+  		var oUl = document.createElement('ul');
+  		for(var i = 0; i < files.length; i++){
+  			console.log(files[i]);
+  			var oLi = document.createElement('li');
+  			var oImg = document.createElement('img');
+        //When you have a File object you'd like to reference by URL from HTML, you can create an object URL for it like this
+  			oImg.src = window.URL.createObjectURL(files[i]);
+  			console.log(oImg.src);
+  			oImg.height = 60;
+
+  			oImg.onload = function(){
+          //释放
+          // The object URL is a string identifying the File object. Each time you call window.URL.createObjectURL(), a unique object URL is created, even if you've created an object URL for that file already. Each of these must be released. While they are released automatically when the document is unloaded, if your page uses them dynamically, you should release them explicitly by calling window.URL.revokeObjectURL():
+
+          // object URL 是一个字符串 与 File object一一对应，每次调用window.URL.createObjectURL(),
+          //就产生一个独一无二的object URL , 即使你为已经存在的文件创建 object URL, 每一个object URL
+          // 一定要被释放 , 如果是在没有加载的时候 , 他们会被自动释放 ,  如果你的object URL 已经在使用
+          // 你要手动调用 window.URL.revokeObjectURL(); 来释放他；
+  				window.URL.revokeObjectURL(this.src);
+  			}
+  			var info = document.createElement('span');
+  			info.innerHTML = '   ' + files[i].name+ ":" + files[i].size + "byte";
+
+				oLi.appendChild(oImg);
+  			oLi.appendChild(info);
+  			oUl.appendChild(oLi);
+  		}
+  		fileList.innerHTML = '';
+  		fileList.appendChild(oUl);
+  	}
+  }
+	</script>
+</head>
+<body>
+  <!-- multiple 可以一次选择多个文件 -->
+	<input id="fileElem" type="file" multiple accept="image/*" style="display:none;" onchange="handleFile(this.files)"/>
+	<a id="fileSelect" href="#">选择文件</a>
+	<div id="fileList">
+	<p>没有文件</p>
+	</div>
+</body>
+</html>

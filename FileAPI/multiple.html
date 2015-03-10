@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>multiple demo</title>
+
+	<script>
+	window.onload = function(){
+	  document.getElementById('fileSelect').addEventListener('change',showFile,false);
+	}
+
+
+	function showFile(e){
+		var files = e.target.files;
+		var outPut = [];
+		for(var i = 0, f; f = files[i]; i++){
+			// console.log(f);
+			// lastModifiedDate: Wed Mar 04 2015 15:23:36 GMT+0800 (CST)
+			// name: "5.jpg"
+			// size: 101479
+			// type: "image/jpeg"
+			// escape() 函数可对字符串进行编码，这样就可以在所有的计算机上读取该字符串。
+			outPut.push('<li><strong>名称',escape(f.name),'</strong>  上传时间:',f.lastModifiedDate.toLocaleDateString(),'</li>');
+
+		}
+		document.getElementById('list').innerHTML = '<ul>'+outPut.join('')+'</ul>'
+	}
+	</script>
+</head>
+<body>
+	<input id="fileSelect" type="file" multiple />
+	<div id="list">
+	</div>
+</body>
+</html>

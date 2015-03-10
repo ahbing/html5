@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>FileReader</title>
+	<style>
+	.img{
+		height: 100%;
+		border: 2px dashed #ccc;
+	}
+	</style>
+	<script>
+	window.onload = function(){
+		document.getElementById('fileInput').addEventListener('change',handleFiles,false);
+	}
+
+	function handleFiles(e){
+		var files = e.target.files;
+
+		for(var i = 0, f; f = files[i]; i++){
+			// 匹配图片
+			if(!f.type.match('image.*')){
+				continue;
+			}
+			var reader = new FileReader();
+			reader.onload = (function(theFile){
+				console.log(theFile);
+				return function(e){
+					var span = document.createElement('span');
+					console.log(e);
+					console.log(e.target.result); //base 64
+					span.innerHTML = ['<img class="img" src="',e.target.result,'" title="',escape(theFile.name),'">'].join('');
+					document.getElementById('list').insertBefore(span,null);
+				}
+			})(f);  //  一个个的读取文件
+
+			reader.readAsDataURL(f);
+		}
+	}
+	</script>
+</head>
+<body>
+	<input id="fileInput" type="file" multiple>
+	<output id="list"></output>
+</body>
+</html>
