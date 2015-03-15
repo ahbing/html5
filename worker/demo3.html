@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>demo3 </title>
+</head>
+<body>
+<div id="log"></div>
+<!-- 這個腳本不會被瀏覽器執行  因爲他的type 是 worker -->
+<script id="worker1" type="javascript/worker">
+	self.addEventListener('message',function(e){
+		self.postMessage('來自worker的消息');
+	},false);
+</script>
+<script>
+	window.onload = function(){
+		// 創建blob 實例
+		//過去使用BlobBuilder
+		//var bb = new BlobBuilder();
+		//添加worker的blob 數據
+		//bb.append(document.querySelector('#worker1').textContent);
+		var theWorker = document.querySelectorAll('script[type=\"javascript\/worker\"]');
+
+		// call  將調用的數組的每個元素轉遞給指定函數
+		var blob = new Blob(Array.prototype.map.call(theWorker,function(oScript){
+			return oScript.textContent;
+		}),{type:"text/javascript"});
+
+		var worker = new Worker(window.URL.createObjectURL(blob));
+		worker.addEventListener('message',function(e){
+			log(e.data);
+		},false);
+ 		//啓用 worker
+		worker.postMessage();
+
+		function log(msg){
+			// 使用fragment 可以讓瀏覽器只渲染一次 提高性能
+			var fragment = document.createDocumentFragment();
+			fragment.appendChild(document.createTextNode(msg));
+			fragment.appendChild(document.createElement('br'));
+
+			document.querySelector('#log').appendChild(fragment);
+
+		}
+	};
+
+
+</script>
+</body>
+</html>

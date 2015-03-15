@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>主腳本</title>
+	<script>
+	window.onload = function(){
+
+		var worker = new Worker('demo1.js');
+		worker.addEventListener('measage',function(e){
+			// 監聽 doWorker.js 傳遞的message
+			console.log('worker said:',e.data);
+		},false);
+		// 向doWorker.js  發送meassage;
+		worker.postMessage('hello worker');
+	}
+
+	</script>
+</head>
+<body>
+</body>
+</html>

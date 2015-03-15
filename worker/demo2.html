@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>demo2</title>
+</head>
+<body>
+	<button id="sayHi">sayHi</button>
+	<button id="sayBye">sayBye</button>
+	<button id="unKnowCommand">unKnowCommand</button>
+	<output id="result"></output>
+
+	<script>
+	window.onload = function(){
+		var oSayHi = document.getElementById('sayHi');
+		var oSayBye = document.getElementById('sayBye');
+		var oUnknowCommand = document.getElementById('unKnowCommand');
+		var oResult = document.getElementById('result');
+
+
+		oSayHi.addEventListener('click',sayHi,false);
+		oSayBye.addEventListener('click',sayBye,false);
+		oUnknowCommand.addEventListener('click',unKnowCommand,false);
+		var worker = new Worker('demo2.js');
+		worker.addEventListener('message',function(e){
+			oResult.textContent = e.data;
+		},false);
+
+		function sayHi(){
+			worker.postMessage({'cmd':'start','msg':'Hi'});
+
+		}
+
+		function sayBye(){
+			worker.postMessage({'cmd':'stop','msg':'Bye'});
+		}
+		function unKnowCommand(){
+			worker.postMessage({'cmd':'unknow','msg':'unKnowCommand'});
+		}
+	}
+
+
+	</script>
+</body>
+</html>
