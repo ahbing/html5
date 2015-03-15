@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title> 填充和描邊三角形</title>
+	<style>
+	html,canvas,body{
+		padding: 0;
+		margin:0;
+	}
+	</style>
+	<script>
+	window.onload = draw;
+	function draw(){
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+
+		ctx.beginPath();
+		ctx.moveTo(0,0);
+		ctx.lineTo(25,0);
+		ctx.lineTo(0,25);
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.moveTo(30,0);
+		ctx.lineTo(30,30);
+		ctx.lineTo(0,30);
+		ctx.closePath();  //關閉路徑
+		ctx.stroke();
+
+	}
+	</script>
+</head>
+<body>
+	<canvas id="canvas" width="150" height="150">
+		你的瀏覽器不支持canvas
+	</canvas>
+</body>
+</html>

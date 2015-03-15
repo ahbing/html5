@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title> 矩陣思想 繪製 弧線 </title>
+  <style>
+  html,canvas,body{
+    padding: 0;
+    margin:0;
+  }
+  </style>
+  <script>
+  window.onload = draw;
+  function draw(){
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    // 繪製圓弧  arc(x, y, radius, startAngle, endAngle, anticlockwise)
+
+    for(var i = 0; i < 4; i++){  // 行數爲4  即i體現在y方向上
+      for(var j = 0; j < 3; j++){  //列數爲3 j體現在x方向上
+        ctx.beginPath();
+        var x = 25 + j*50;
+        var y = 25 + i*50;
+        var radius = 20;
+        var startAngle = 0;
+        var endAngle = Math.PI + (Math.PI * j)/2;
+        var anticlockwise = i%2 == 0 ? true : false;
+
+        ctx.arc(x,y,radius,startAngle,endAngle,anticlockwise);
+
+        if(i>1){
+          ctx.fill();
+        }else{
+          ctx.stroke();
+        }
+
+      }
+    }
+
+
+  }
+  </script>
+</head>
+<body>
+  <canvas id="canvas" width="150" height="150">
+    你的瀏覽器不支持canvas
+  </canvas>
+</body>
+</html>

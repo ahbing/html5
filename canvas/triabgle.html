@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>繪製三角形</title>
+	<style>
+	html,canvas,body{
+		padding: 0;
+		margin:0;
+	}
+	</style>
+	<script>
+	window.onload = draw;
+	function draw(){
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+		ctx.beginPath(); // 開始繪製路徑
+		ctx.moveTo(10,60); //起始點座標
+		ctx.lineTo(60,60);  //鏈接到
+		ctx.lineTo(60,10);
+
+		ctx.fill();  //填充路徑
+		// 調用 fill 函數會自動關閉路徑  調用stroke 若要閉合則需要closePath();
+		//ctx.closePath();  // 關閉路徑
+	}
+	</script>
+</head>
+<body>
+	<canvas id="canvas" width="150" height="150">
+		你的瀏覽器不支持canvas
+	</canvas>
+</body>
+</html>

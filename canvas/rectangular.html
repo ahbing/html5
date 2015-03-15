@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>繪製矩形</title>
+	<style>
+	html,canvas,body{
+		padding: 0;
+		margin:0;
+	}
+	</style>
+	<script>
+	window.onload = draw;
+	function draw(){
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+		//pramas (x,y,w,h)
+		//填充矩形
+		ctx.fillRect(10,10,100,100);
+		//清空矩形  清空部分 變透明
+		ctx.clearRect(35,35,50,50);
+		//描邊
+		ctx.strokeRect(50,50,20,20);
+	}
+	</script>
+</head>
+<body>
+	<canvas id="canvas" width="150" height="150">
+		你的瀏覽器不支持canvas
+	</canvas>
+</body>
+</html>

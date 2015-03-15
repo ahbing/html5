@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>繪製笑臉（圓）</title>
+	<style>
+	html,canvas,body{
+		padding: 0;
+		margin:0;
+	}
+	</style>
+	<script>
+	window.onload = draw;
+	function draw(){
+		var canvas = document.getElementById('canvas');
+		var ctx = canvas.getContext('2d');
+		// arc(x,y,r,起始角，結束角，順時針fasle);
+		ctx.beginPath();
+		ctx.arc(75,75,50,0,Math.PI*2,false);  //  臉的輪廓
+		ctx.moveTo(90,90);   //
+		ctx.arc(75,90,15,0,Math.PI*1,false);  // 順時針的笑臉
+		ctx.moveTo(65,65);
+		ctx.arc(60,65,5,0,Math.PI*2,false);
+		ctx.moveTo(95,65);
+		ctx.arc(90,65,5,0,Math.PI*2,false);
+ 		ctx.stroke();
+ 		//  去掉 moveTo  將顯示繪製軌跡
+	}
+	</script>
+</head>
+<body>
+	<canvas id="canvas" width="150" height="150">
+		你的瀏覽器不支持canvas
+	</canvas>
+</body>
+</html>
