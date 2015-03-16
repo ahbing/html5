@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>canvas 繪製圖片</title>
+  <style>
+  html,canvas,body{
+    padding: 0;
+    margin:0;
+  }
+  </style>
+  <script>
+  window.onload = draw;
+  function draw(){
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    var img = new Image();
+    img.onload = function(){
+      //drawImage 方法将背景图放置在 canvas 的左上角 (0,0) 处。
+      ctx.drawImage(img,0,0);
+    }
+    img.src = 'https://www.google.com/logos/doodles/2015/anna-atkins-216th-birthday-5710044637167616.3-hp.jpg';
+  }
+  </script>
+</head>
+<body>
+  <canvas id="canvas" width="450" height="450">
+    你的瀏覽器不支持canvas
+  </canvas>
+</body>
+</html>

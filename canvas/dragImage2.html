@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>canvas 繪製圖片 平鋪</title>
+  <style>
+  html,canvas,body{
+    padding: 0;
+    margin:0;
+  }
+  </style>
+  <script>
+  window.onload = draw;
+  function draw(){
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    var img = new Image();
+    img.onload = function(){
+      //drawImage(image, x, y, width, height)
+
+      for(var i = 0;i < 4;i++){ //y 方向  4行
+        for(var j = 0; j < 3; j++){  //  x方向
+          ctx.drawImage(img,j*100,i*60,80,50);
+        }
+      }
+    }
+    img.src = 'https://www.google.com/logos/doodles/2015/anna-atkins-216th-birthday-5710044637167616.3-hp.jpg';
+  }
+  </script>
+</head>
+<body>
+  <canvas id="canvas" width="450" height="450">
+    你的瀏覽器不支持canvas
+  </canvas>
+</body>
+</html>

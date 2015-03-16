@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>lineCap</title>
+  <style>
+  html,canvas,body{
+    padding: 0;
+    margin:0;
+  }
+  </style>
+  <script>
+  window.onload = draw;
+  function draw(){
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    var lineCap = ['butt','round','square'];//默認   圓  方
+
+    ctx.beginPath();
+    ctx.fillStyle = '09f';
+    ctx.moveTo(10,10);
+    ctx.lineTo(10,140);
+
+    ctx.moveTo(20,10);
+    ctx.lineTo(20,140);
+
+    ctx.stroke();
+
+    ctx.fillStyle = 'black';
+    ctx.lineWidth = 20;
+    for(var i = 0; i < lineCap.length;i++){
+      ctx.lineWidth = 20;
+      ctx.lineCap = lineCap[i];
+      ctx.beginPath();
+      ctx.moveTo(40+i*30,10);
+      ctx.lineTo(40+i*30,140);
+      ctx.stroke();
+
+    }
+
+  }
+
+  </script>
+</head>
+<body>
+  <canvas id="canvas" width="450" height="450">
+    你的瀏覽器不支持canvas
+  </canvas>
+</body>
+</html>

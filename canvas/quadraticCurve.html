@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>繪製氣泡</title>
+  <style>
+  html,canvas,body{
+    padding: 0;
+    margin:0;
+  }
+  </style>
+  <script>
+  window.onload = draw;
+  function draw(){
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    //ctx.quadraticCurveTo(控制點座標，結束點座標)
+    ctx.moveTo(45,10);
+    ctx.quadraticCurveTo(10,10,10,30);
+    ctx.quadraticCurveTo(10,50,30,50);
+    ctx.quadraticCurveTo(30,60,22,60);
+    ctx.quadraticCurveTo(45,60,45,50);
+    ctx.quadraticCurveTo(80,50,80,30);
+    ctx.quadraticCurveTo(80,10,45,10);
+
+    ctx.stroke();
+  }
+  </script>
+</head>
+<body>
+  <canvas id="canvas" width="150" height="450">
+    你的瀏覽器不支持canvas
+  </canvas>
+</body>
+</html>

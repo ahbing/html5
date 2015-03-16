@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>lineWidth</title>
+  <style>
+  html,canvas,body{
+    padding: 0;
+    margin:0;
+  }
+  </style>
+  <script>
+  window.onload = draw;
+  function draw(){
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    for(var i =0; i< 10;i++){
+      ctx.lineWidth = i+1;
+      ctx.beginPath();
+      ctx.moveTo(5+i*14,5);
+      ctx.lineTo(5+i*14,140);
+      ctx.stroke();
+    }
+  }
+
+  </script>
+</head>
+<body>
+  <canvas id="canvas" width="450" height="450">
+    你的瀏覽器不支持canvas
+  </canvas>
+</body>
+</html>

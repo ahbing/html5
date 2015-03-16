@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>strokeStyle 實例</title>
+  <style>
+  html,canvas,body{
+    padding: 0;
+    margin:0;
+  }
+  </style>
+  <script>
+  window.onload = draw;
+  function draw(){
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    for(var i = 0; i < 6; i++){
+      for(var j = 0; j < 6; j++){
+        ctx.strokeStyle = 'rgb('+Math.floor(255-i*42.5)+',0,'+Math.floor(255 -j*42.5)+')';
+        ctx.beginPath();
+        // fillRect(x,y,w,h)
+        ctx.arc(12.5+j*25,12.5+i*25,10,0,Math.PI*2,false);
+        ctx.stroke();
+      }
+    }
+  }
+
+  </script>
+</head>
+<body>
+  <canvas id="canvas" width="450" height="450">
+    你的瀏覽器不支持canvas
+  </canvas>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>漸變</title>
+  <style>
+  html,canvas,body{
+    padding: 0;
+    margin:0;
+  }
+  </style>
+  <script>
+  window.onload = draw;
+  function draw(){
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    //創建漸變
+    //createLinearGradient(x1,y1,x2,y2)
+    //createLinearGradient 方法接受 4 个参数，表示渐变的起点 (x1,y1) 与终点 (x2,y2)。
+
+    var linearGradient = ctx.createLinearGradient(0,0,0,150);
+    //從(0,50)開始漸變  到(0,100)
+    var linearGradient2 = ctx.createLinearGradient(0,50,0,100);
+    //addColorStop
+    //addColorStop(position, color)
+    //position 参数必须是一个 0.0 与 1.0 之间的数值，表示渐变中颜色所在的相对位置。例如，0.5 表示颜色会出现在正中间。color 参数必须是一个有效的 CSS 颜色值（如 #FFF， rgba(0,0,0,1)，等等）
+    linearGradient.addColorStop(0,'#00ABEB');
+    linearGradient.addColorStop(0.5,'#fff');
+    linearGradient.addColorStop(0.5,'#26C000');
+    linearGradient.addColorStop(1,'#fff');
+
+    linearGradient2.addColorStop(0.5,'black');
+    linearGradient2.addColorStop(1,'rgba(0,0,0,0)');
+
+    ctx.fillStyle = linearGradient;
+    ctx.strokeStyle = linearGradient2;
+
+    ctx.fillRect(0,0,120,150);
+    ctx.strokeRect(30,50,50,50);
+  }
+
+  </script>
+
+</head>
+<body>
+  <canvas id="canvas" width="450" height="450">
+    你的瀏覽器不支持canvas
+  </canvas>
+</body>
+</html>
