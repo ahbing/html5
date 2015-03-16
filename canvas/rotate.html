@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>save  and restore</title>
+	<script>
+		window.onload = draw;
+		function draw(){
+			var canvas = document.getElementById('canvas');
+			var ctx = canvas.getContext('2d');
+
+			ctx.translate(75,75);  // canvas 旋轉之後 中間會有一個 半徑 75 的圓
+
+			for(var i = 1; i < 6; i++){  // 五環
+				ctx.save();
+				ctx.fillStyle = 'rgb('+(51*i)+','+(255-51*i)+',225)';
+				for(var j =0; j< i*6;j++){
+
+					ctx.rotate(Math.PI*2/(i*6));   //每一小球繪製都要響應的旋轉一次
+
+					ctx.beginPath();  //  開始描繪路徑
+
+					ctx.arc(0,12.5*i,5,0,Math.PI*2,false);
+
+					ctx.fill();
+				}
+				ctx.restore();
+			}
+		}
+	</script>
+</head>
+<body>
+	<canvas id="canvas">
+		你的瀏覽器不支持canvas
+	</canvas>
+</body>
+</html>
